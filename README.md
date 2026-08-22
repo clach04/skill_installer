@@ -57,6 +57,16 @@ python -m skill_installer install grill-with-docs \
   --target ~/.claude/skills
 ```
 
+Microsoft Windows
+```bash
+python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.claude\skills"
+python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.copilot\skills"
+python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.config\kon\skills"
+python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.pi\agent\skills"
+python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.agents\skills"
+...
+```
+
 Preview what would change without copying anything:
 
 ```bash
@@ -66,6 +76,11 @@ python -m skill_installer install grill-with-docs \
   --dry-run
 ```
 
+Microsoft Windows
+```bash
+python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.claude\skills" --dry-run
+```
+
 Skip the per-skill confirm prompt (for scripted use):
 
 ```bash
@@ -73,6 +88,11 @@ python -m skill_installer install grill-with-docs \
   --source /path/to/mattpocock_skills \
   --target ~/.claude/skills \
   --yes
+```
+
+Microsoft Windows
+```bash
+python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.claude\skills" --yes
 ```
 
 ## How install decides what to touch
