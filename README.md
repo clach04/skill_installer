@@ -59,11 +59,11 @@ python -m skill_installer install grill-with-docs \
 
 Microsoft Windows
 ```bash
-python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.claude\skills"
-python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.copilot\skills"
-python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.config\kon\skills"
-python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.pi\agent\skills"
-python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.agents\skills"
+python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.claude\skills" --source MATTPOCOCK_SKILLS
+python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.copilot\skills" --source MATTPOCOCK_SKILLS
+python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.config\kon\skills" --source MATTPOCOCK_SKILLS
+python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.pi\agent\skills" --source MATTPOCOCK_SKILLS
+python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.agents\skills" --source MATTPOCOCK_SKILLS
 ...
 ```
 
