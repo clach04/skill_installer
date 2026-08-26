@@ -5,6 +5,10 @@ directory with a `SKILL.md`) from a skills repo into your own skills
 directory - without pulling in every skill in that repo, and without pulling
 in skills that reference each other unless you actually need them.
 
+NOTE only works with 658d53e6ded8cc0eaa26a96e0580bee9381ca0e3 of mattpocock/skills
+after that the `/` was removed from the skill cross reference so simple string
+matching for cross referencing no longer works.
+
 Built against [mattpocock/skills](https://github.com/mattpocock/skills)
 (`mattpocock_skills` in this README) as its first source, but works against
 any directory laid out the same way (a `skills/<bucket>/<name>/SKILL.md`
@@ -61,7 +65,6 @@ Microsoft Windows
 ```bash
 python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.claude\skills" --source MATTPOCOCK_SKILLS
 python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.copilot\skills" --source MATTPOCOCK_SKILLS
-python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.config\kon\skills" --source MATTPOCOCK_SKILLS
 python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.pi\agent\skills" --source MATTPOCOCK_SKILLS
 python -m skill_installer install grill-with-docs --target "%USERPROFILE%\.agents\skills" --source MATTPOCOCK_SKILLS
 ...
