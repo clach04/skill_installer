@@ -8,6 +8,9 @@ from pathlib import Path
 
 _FRONTMATTER_KV = re.compile(r"^([a-zA-Z_][a-zA-Z0-9_-]*):\s*(.*)$")
 _SKILL_TOKEN = re.compile(r"/([a-zA-Z][a-zA-Z0-9-]{2,60})")
+# Cross-skill references also appear as quoted names in "call the Skill tool
+# with \"name\"" style phrasing (no leading slash).
+_QUOTED_TOKEN = re.compile(r"[\"']([a-zA-Z][a-zA-Z0-9-]{2,60})[\"']")
 _MD_LINK = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
 
 
@@ -67,7 +70,7 @@ def scan_source(source: Path) -> dict[str, Skill]:
         text = (skill.dir / "SKILL.md").read_text(encoding="utf-8")
         _, body = _parse_frontmatter(text)
 
-        for token in _SKILL_TOKEN.findall(body):
+        for token in _SKILL_TOKEN.findall(body) + _QUOTED_TOKEN.findall(body):
             if token in known_names and token != skill.name:
                 skill.requires_skill.add(token)
 

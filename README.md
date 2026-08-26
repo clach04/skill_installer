@@ -5,9 +5,11 @@ directory with a `SKILL.md`) from a skills repo into your own skills
 directory - without pulling in every skill in that repo, and without pulling
 in skills that reference each other unless you actually need them.
 
-NOTE only works with 658d53e6ded8cc0eaa26a96e0580bee9381ca0e3 of mattpocock/skills
-after that the `/` was removed from the skill cross reference so simple string
-matching for cross referencing no longer works.
+Initially created with 658d53e6ded8cc0eaa26a96e0580bee9381ca0e3 of mattpocock/skills
+before the `/` was removed from the skill cross reference so simple string matching
+worked. Post that change a different cross referencing string pattern is used,
+which might be too greedy (but so far 2026-08-25 is working correctly). Skill
+installer will prompt by default as a sanity check.
 
 Built against [mattpocock/skills](https://github.com/mattpocock/skills)
 (`mattpocock_skills` in this README) as its first source, but works against
