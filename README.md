@@ -100,6 +100,33 @@ Microsoft Windows
 python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.claude\skills" --yes
 ```
 
+## Skill tool compatibility
+
+Some skills (especially Claude Code-style ones) instruct the agent to
+*"Call the Skill tool"* for a named skill. Not every agent has a Skill tool:
+
+- **Native Skill tool** (Claude Code, Pi.dev, and similar): these skills work
+  as-is.
+- **Read-based agents** (e.g. Kon): skills are loaded by reading `SKILL.md`
+  files directly; there is no Skill tool to call. For these, add this
+  directive to your global `AGENTS.md` (for Kon: `~/.config/kon/AGENTS.md`):
+
+  ```
+  Some skills instruct the agent to "Call the Skill tool" for a named skill.
+  This agent has no Skill tool: instead, read that skill's SKILL.md (resolve the
+  name against ~/.agents/skills/ or the project's .agents/skills/) and follow it,
+  including any files it references relative to its directory.
+  ```
+
+After an install, `skill_installer` scans what it installed and warns if any
+files reference a "Skill tool" (printing the directive above), plus a softer
+note for skills using the Claude-style `disable-model-invocation` frontmatter
+flag, which read-based agents may silently ignore (meaning the skill could be
+auto-invoked rather than user-invoked-only).
+
+The installer never rewrites skill content - detection and warning only, so
+the same installed files stay portable across agents.
+
 ## How install decides what to touch
 
 Each selected skill is compared file-by-file (content hash) against its

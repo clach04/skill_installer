@@ -6,6 +6,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from .compat import check_installed
 from .installer import copy_extra_file, copy_skill_dir, diff_dirs, render_diff
 from .resolver import resolve
 from .scanner import scan_source
@@ -89,6 +90,9 @@ def _cmd_install(source: Path, target: Path, names: list[str], dry_run: bool, ye
                 continue
         copy_extra_file(source, file_path, target)
         print(f"copied -> {dest}")
+
+    if not dry_run:
+        check_installed(target, sorted(resolution.skills))
 
     return 0
 
