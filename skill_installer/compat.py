@@ -20,10 +20,12 @@ SKILL_TOOL_MARKER = "skill tool"
 MODEL_INVOCATION_MARKER = "disable-model-invocation"
 
 AGENTS_MD_SNIPPET = """\
-Some skills instruct the agent to "Call the Skill tool" for a named skill.
-This agent has no Skill tool: instead, read that skill's SKILL.md (resolve the
-name against ~/.agents/skills/ or the project's .agents/skills/) and follow it,
-including any files it references relative to its directory.
+If this agent has no "Skill tool", then when a skill says to "Call the Skill
+tool" for a named skill, instead read that skill's SKILL.md (resolve the name
+against ~/.agents/skills/ or the project's .agents/skills/) and follow it,
+including any files it references relative to its directory. If the agent
+does have a Skill tool, ignore this instruction and use the Skill tool as
+the skill says.
 """
 
 

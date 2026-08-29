@@ -109,13 +109,17 @@ Some skills (especially Claude Code-style ones) instruct the agent to
   as-is.
 - **Read-based agents** (e.g. Kon): skills are loaded by reading `SKILL.md`
   files directly; there is no Skill tool to call. For these, add this
-  directive to your global `AGENTS.md` (for Kon: `~/.config/kon/AGENTS.md`):
+  directive to your global `AGENTS.md` (for Kon: `~/.config/kon/AGENTS.md`).
+  The snippet is conditional, so it is safe to paste even into AGENTS.md
+  files that agents with a native Skill tool also read:
 
   ```
-  Some skills instruct the agent to "Call the Skill tool" for a named skill.
-  This agent has no Skill tool: instead, read that skill's SKILL.md (resolve the
-  name against ~/.agents/skills/ or the project's .agents/skills/) and follow it,
-  including any files it references relative to its directory.
+  If this agent has no "Skill tool", then when a skill says to "Call the Skill
+  tool" for a named skill, instead read that skill's SKILL.md (resolve the name
+  against ~/.agents/skills/ or the project's .agents/skills/) and follow it,
+  including any files it references relative to its directory. If the agent
+  does have a Skill tool, ignore this instruction and use the Skill tool as
+  the skill says.
   ```
 
 After an install, `skill_installer` scans what it installed and warns if any
