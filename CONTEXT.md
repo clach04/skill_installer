@@ -33,6 +33,16 @@ target resolves to a real file on disk. Only matters for install purposes
 when the target lies outside the referencing skill's own directory - a
 sibling file is already covered by copying the whole skill directory.
 
+**Flatten**:
+Rendering one or more **Skills** (with their full **Resolution**) into a
+single portable markdown document for use in a chat session that has no
+skill-loading mechanism. Each skill becomes a `## skill-name` section (bucket
+and description as metadata), containing its `SKILL.md` body with frontmatter
+stripped, plus any markdown files it links to. Sections appear
+selection-first, then dependencies. Preamble is configurable with a sensible
+default that also tells the consuming chat how to interpret "call skill X"
+references.
+
 **Resolution**:
 Expanding one or more selected **Skills** into the full transitive closure of
 their **requires_skill** edges (and any **requires_file** targets outside a

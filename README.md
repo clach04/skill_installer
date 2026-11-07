@@ -33,7 +33,7 @@ what it resolved to, and copies (not symlinks) only that set into a target
 directory you choose.
 
 See [CONTEXT.md](./CONTEXT.md) for the glossary (Skill, Source, Target,
-Bucket, `requires_skill`, `requires_file`, Resolution) and
+Bucket, `requires_skill`, `requires_file`, Resolution, Flatten) and
 [docs/adr/](./docs/adr/) for why it copies instead of symlinking and why the
 source is a plain path instead of a vendored submodule.
 
@@ -99,6 +99,39 @@ Microsoft Windows
 ```bash
 python -m skill_installer install grill-with-docs --source MATTPOCOCK_SKILLS --target "%USERPROFILE%\.claude\skills" --yes
 ```
+
+## Flatten: a single-file export for skill-less chat sessions
+
+`flatten` renders one or more skills — with their full dependency resolution,
+like `install` — into a single markdown document you can paste into a chat
+session that has no skill-loading mechanism. Each skill becomes a
+`## <skill-name>` section (bucket and description as metadata) containing its
+`SKILL.md` with frontmatter stripped, plus any markdown files it links to
+(e.g. `ADR-FORMAT.md`).
+
+```bash
+python -m skill_installer flatten grill-with-docs --source /path/to/mattpocock_skills
+python -m skill_installer flatten grill-with-docs --source /path/to/mattpocock_skills > prompt.md
+```
+
+The preamble (on by default) tells the consuming chat how to treat the
+sections, including the "call skill X" convention. Override it with
+`--preamble TEXT`, `--preamble-file PATH`, or drop it with `--no-preamble`.
+
+Other options:
+
+- `--all-files` — inline every text file in each skill directory, not just
+  `SKILL.md` and linked files. Binary/undecodable files are skipped with a
+  warning.
+- `--fences` — wrap file content in dynamic-length code fences (one more
+  backtick than the longest backtick run in the file) instead of indenting.
+  Indentation is the default because it is collision-proof: a skill whose own
+  body contains a code fence (like the round-format template in `grilling`)
+  would break a plain ``` wrapper. See
+  [ADR-0003](./docs/adr/0003-indented-files-default-export-format.md).
+- `--no-deps` — export only the named skills, without pulling in their
+  `requires_skill` dependencies.
+- `--output FILE` — write to a file instead of stdout.
 
 ## Skill tool compatibility
 
